@@ -1,11 +1,16 @@
-javascript:(function(){
-    var name = 'Insta';
-    var shortcut = 'ctrl+up';
+(() => {
+    const name = 'Insta';
+    const shortcut = 'ctrl+up';
 
     window._insta = window._insta || [];
 
+    const POPUP_CTN_CLASS = '.PdwC2';
+    const POPUP_IMG_CTN_CLASS = '.ZyFrc';
+    const UNWANTED_EL_CLASSES = ['_6q-tv'];
+    const BASE_URL = 'http://localhost:8080';
+
     function push (src) {
-        if (!window._insta.find(function (a) { return a === src; })) {
+        if (!window._insta.find((a) => { return a === src; })) {
             window._insta.push(src);
         }
     }
@@ -17,7 +22,7 @@ javascript:(function(){
     }
 
     function openInNewTabs () {
-        window._insta.forEach(function (src) {
+        window._insta.forEach((src) => {
             window.open(src, '_blank');
         });
     }
@@ -28,20 +33,42 @@ javascript:(function(){
         inputText.blur();
     }
 
-    var POPUP_CTN_CLASS = '.PdwC2';
-    var POPUP_IMG_CTN_CLASS = '.ZyFrc';
-    var UNWANTED_EL_CLASSES = ['_6q-tv'];
-    var imgs = document.querySelectorAll(POPUP_IMG_CTN_CLASS + ' img');
+    // async function save(el) {
+    //     const url = `${BASE_URL}/api/save`;
+    //     const opts = {
+    //       method: 'POST',
+    //       headers: {
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({
+    //         starName: 'test',
+    //         src: el.src
+    //       }),
+    //     };
 
-    (imgs || []).forEach(function (i) {
+    //     console.log('### url:', url);
+    //     console.log('### opts:', opts);
+
+    //     await fetch(url, opts)
+    //         .then((result) => {
+    //             console.log('### result:', result);
+    //         })
+    //         .catch((e) => {
+    //             console.log('### error:', e);
+    //         });
+    // }
+
+    const imgs = document.querySelectorAll(POPUP_IMG_CTN_CLASS + ' img');
+    (imgs || []).forEach((i) => {
         if (i.classList.contains(UNWANTED_EL_CLASSES)) { return; }
         push(i.src);
         highlight(i);
+        // save(i);
     });
 
-    var vids = document.querySelectorAll(POPUP_IMG_CTN_CLASS + ' video');
-
-    (vids || []).forEach(function (v) {
+    const vids = document.querySelectorAll(POPUP_IMG_CTN_CLASS + ' video');
+    (vids || []).forEach((v) => {
         if (v.classList.contains(UNWANTED_EL_CLASSES)) { return; }
         push(v.src);
         highlight(v);
@@ -61,8 +88,8 @@ javascript:(function(){
         // !isFilled && likeBtn.click();
     // }
 
-    var itemsListInput = document.querySelector('.items-list');
-    var openInNewTabBtn = document.querySelector('.open-in-new-tab-btn');
+    let itemsListInput = document.querySelector('.items-list');
+    let openInNewTabBtn = document.querySelector('.open-in-new-tab-btn');
 
     if (!itemsListInput) {
         itemsListInput = document.createElement('input');
@@ -73,8 +100,8 @@ javascript:(function(){
         itemsListInput.style.width = '90%';
         itemsListInput.style['z-index'] = '10';
         itemsListInput.classList.add('items-list');
-        itemsListInput.addEventListener('click', function () {
-            setTimeout(function () { copyInputText(itemsListInput) });
+        itemsListInput.addEventListener('click', () => {
+            setTimeout(() => { copyInputText(itemsListInput) });
             copyInputText(itemsListInput);
         });
 
@@ -94,4 +121,4 @@ javascript:(function(){
 
     openInNewTabBtn.value = 'Open ' + window._insta.length + '/30 items in new tabs'
     itemsListInput.value = window._insta.join(' ');
-}());
+})();
