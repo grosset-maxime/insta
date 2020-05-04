@@ -1,0 +1,13 @@
+{
+  "name": "insta-back",
+  "version": "1.0.0",
+  "description": "insta",
+  "author": "Grosset Maxime",
+  "private": true,
+  "scripts": {
+    "dev": "node public/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
