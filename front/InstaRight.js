@@ -45,6 +45,7 @@ javascript:(function () {
 
         var sheet = document.styleSheets[0];
         sheet.insertRule('._8-yf5[aria-label="Unlike"] { transform: scale(10); }', 0);
+        sheet.insertRule('._8-yf5[aria-label="Je n’aime plus"] { transform: scale(10); }', 0);
         sheet.insertRule('.ekfSF.ekfSF { overflow: hidden; }', 0);
         sheet.insertRule('._7UhW9 { cursor: pointer; transition: .4s; }', 0);
         sheet.insertRule('._7UhW9.clicked { transform: scale(2); }', 0);
