@@ -7,11 +7,11 @@ app.get('/', (req, res) => {
     res.send('Vous êtes à l\'accueil');
 });
 
-app.get('/api/save', (req, res) => {
-    console.log('### req:', req);
+app.get('/api/cleanup', (req, res) => {
+    // console.log('### req:', req);
 
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(req));
+    res.end(JSON.stringify({}));
 });
 
 app.listen(8080);
