@@ -1,5 +1,5 @@
 (() => {
-    const version = '1.0.0';
+    const version = '1.0.1';
     const name = 'Insta';
     const shortcut = 'ctrl+up';
 
@@ -14,6 +14,7 @@
     function push (src) {
         if (!window._insta.find((a) => { return a === src; })) {
             window._insta.push(src);
+            save(src);
         }
     }
 
@@ -35,7 +36,7 @@
         inputText.blur();
     }
 
-    function save(el) {
+    function save(src) {
 
         function getFileName(url = '') {
             var m = url.toString().match(/.*\/(.+?)\./);
@@ -47,7 +48,7 @@
             return starNameEl ? starNameEl.textContent.replace(/[/\\?%*:|"<>]/g, '') : '';
         }
         
-        const url = el.src;
+        const url = src;
         fetch(url)
             .then(response => response.blob())
             .then(blob => {
@@ -79,7 +80,6 @@
         if (i.classList.contains(UNWANTED_EL_CLASSES)) { return; }
         push(i.src);
         highlight(i);
-        save(i);
     });
 
     const vids = document.querySelectorAll(POPUP_VID_CTN_CLASS + ' video');
@@ -87,7 +87,6 @@
         if (v.classList.contains(UNWANTED_EL_CLASSES)) { return; }
         push(v.src);
         highlight(v);
-        save(v);
     });
 
     // var likeBtn = document.querySelector(POPUP_CTN_CLASS + ' .fr66n button');
