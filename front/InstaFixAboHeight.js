@@ -1,6 +1,9 @@
-javascript:(function () {
-    var name = 'InstaFixAboHeight';
-    var shortcut = 'ctrl+0';
+(() => {
+    const version = '1.0.0';
+    const name = 'InstaFixAboHeight';
+    const shortcut = 'ctrl+0';
 
-    document.getElementsByClassName('pbNvD')[0].style['max-height'] = '100%';
-}());
+    const ABO_CTN_CLASS = 'pbNvD';
+
+    document.getElementsByClassName(ABO_CTN_CLASS)[0].style['max-height'] = '100%';
+})();

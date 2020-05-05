@@ -1,7 +1,8 @@
-javascript:(function(){
-    var name = 'InstaSildePrev';
-    var shortcut = 'ctrl down';
+(() => {
+    const version = '1.0.0';
+    const name = 'InstaSildePrev';
+    const shortcut = 'ctrl down';
 
-    var slidePrevBtn = document.querySelector('.coreSpriteLeftChevron');
+    const slidePrevBtn = document.querySelector('.coreSpriteLeftChevron');
     slidePrevBtn && slidePrevBtn.click();
-}());
+})();

@@ -1,10 +1,12 @@
-javascript:(function(){
-    var name = 'InstaOpenVideoNewTab';
-    var shortcut = 'ctrl+down';
+(() => {
+    const version = '1.0.0';
+    const name = 'InstaOpenVideoNewTab';
+    const shortcut = 'ctrl+down';
 
-    var POPUP_CTN_CLASS = '.PdwC2';
-    var refRect = document.querySelectorAll(POPUP_CTN_CLASS)[0].getBoundingClientRect();
-    var vidsCtn = document.querySelectorAll('.RzuR0');
+    const POPUP_CTN_CLASS = '.PdwC2';
+
+    const refRect = document.querySelectorAll(POPUP_CTN_CLASS)[0].getBoundingClientRect();
+    const vidsCtn = document.querySelectorAll('.RzuR0');
 
     function openInNewTab (ctn) {
         ctn = ctn || document;
@@ -20,4 +22,4 @@ javascript:(function(){
     if (!vidsCtn.length) {
         openInNewTab();
     }
-}())
+})();

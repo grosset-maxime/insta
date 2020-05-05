@@ -1,4 +1,5 @@
 (() => {
+    const version = '1.0.0';
     const name = 'Insta';
     const shortcut = 'ctrl+up';
 
@@ -6,8 +7,9 @@
 
     const POPUP_CTN_CLASS = '.PdwC2';
     const POPUP_IMG_CTN_CLASS = '.ZyFrc';
+    const POPUP_VID_CTN_CLASS = '._97aPb';
     const UNWANTED_EL_CLASSES = ['_6q-tv'];
-    const BASE_URL = 'http://localhost:8080';
+    const STAR_NAME_EL_CLASS = '._7UhW9';
 
     function push (src) {
         if (!window._insta.find((a) => { return a === src; })) {
@@ -33,45 +35,59 @@
         inputText.blur();
     }
 
-    // async function save(el) {
-    //     const url = `${BASE_URL}/api/save`;
-    //     const opts = {
-    //       method: 'POST',
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         starName: 'test',
-    //         src: el.src
-    //       }),
-    //     };
+    function save(el) {
 
-    //     console.log('### url:', url);
-    //     console.log('### opts:', opts);
+        function getFileName(url = '') {
+            var m = url.toString().match(/.*\/(.+?)\./);
+            return m && m.length > 1 ? m[1] : '';
+        }
 
-    //     await fetch(url, opts)
-    //         .then((result) => {
-    //             console.log('### result:', result);
-    //         })
-    //         .catch((e) => {
-    //             console.log('### error:', e);
-    //         });
-    // }
+        function getStarName () {
+            var starNameEl = document.querySelector(STAR_NAME_EL_CLASS);
+            return starNameEl ? starNameEl.textContent.replace(/[/\\?%*:|"<>]/g, '') : '';
+        }
+        
+        const url = el.src;
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+                const fileName = `${getStarName()} - ${getFileName(url)}`;
+                const objectUrl = window.URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                
+                a.href = objectUrl;
+                a.download = fileName || 'download';
+                
+                const clickHandler = () => {
+                    setTimeout(() => {
+                    URL.revokeObjectURL(objectUrl);
+                    this.removeEventListener('click', clickHandler);
+                    }, 150);
+                };
+
+                a.addEventListener('click', clickHandler, false);
+
+                a.click();
+
+                return a;
+            });
+    }
 
     const imgs = document.querySelectorAll(POPUP_IMG_CTN_CLASS + ' img');
     (imgs || []).forEach((i) => {
         if (i.classList.contains(UNWANTED_EL_CLASSES)) { return; }
         push(i.src);
         highlight(i);
-        // save(i);
+        save(i);
     });
 
-    const vids = document.querySelectorAll(POPUP_IMG_CTN_CLASS + ' video');
+    const vids = document.querySelectorAll(POPUP_VID_CTN_CLASS + ' video');
     (vids || []).forEach((v) => {
         if (v.classList.contains(UNWANTED_EL_CLASSES)) { return; }
         push(v.src);
         highlight(v);
+        save(v);
     });
 
     // var likeBtn = document.querySelector(POPUP_CTN_CLASS + ' .fr66n button');
@@ -119,6 +135,6 @@
         document.body.appendChild(itemsListInput);
     }
 
-    openInNewTabBtn.value = 'Open ' + window._insta.length + '/30 items in new tabs'
+    openInNewTabBtn.value = 'Open ' + window._insta.length + ' items in new tabs'
     itemsListInput.value = window._insta.join(' ');
 })();

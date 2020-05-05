@@ -1,7 +1,8 @@
-javascript:(function(){
-    var name = 'InstaSildeNext';
-    var shortcut = 'ctrl up';
+(() => {
+    const version = '1.0.0';
+    const name = 'InstaSildeNext';
+    const shortcut = 'ctrl up';
 
-    var slideNextBtn = document.querySelector('.coreSpriteRightChevron');
+    const slideNextBtn = document.querySelector('.coreSpriteRightChevron');
     slideNextBtn && slideNextBtn.click();
-}());
+})();
