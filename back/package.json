@@ -5,9 +5,10 @@
   "author": "Grosset Maxime",
   "private": true,
   "scripts": {
-    "dev": "node public/index.js"
+    "dev": "node index.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4"
   }
 }
