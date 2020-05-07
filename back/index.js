@@ -18,35 +18,34 @@ app.engine('hbs', handlebars({
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    // res.setHeader('Content-Type', 'text/plain');
-    // res.send('index.html');
     // Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
     res.render('main', {
         layout: 'index',
-        helpers: {
-            // toto: 'tata',
-            // cleanUp () {
-                // fetch('/api/save')
-                // .then((response) => {
-                //     console.log(response);
-                // })
-                // .catch((e) => {
-                //     console.log(e);
-                // });
-            // }
-        }
+        helpers: {}
     });
     // res.render('main');
 });
 
-app.get('/api/cleanup', (req, res) => {
-    console.log('### req:', req);
+app.get('/api/cleanup', async (req, res) => {
+    // console.log('### req:', req);
 
     if (process.env.PATH_CLEANUP == null) {
         throw new Error('Missing process.env.PATH_CLEANUP.');
     }
 
+    let success;
+    const cleanup = require('./api/cleanup');
+
+    try {
+        await cleanup.run();
+        success = true;
+    } catch (e) {
+        console.error(e);
+        success = false;
+    }
+
     const resp = {
+        success,
         PATH_CLEANUP: process.env.PATH_CLEANUP
     }
 
