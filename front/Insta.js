@@ -1,5 +1,5 @@
 (() => {
-    const version = '1.0.1';
+    const version = '1.0.2';
     const name = 'Insta';
     const shortcut = 'ctrl+up';
 
@@ -39,12 +39,15 @@
     function save(src) {
 
         function getFileName(url = '') {
-            var m = url.toString().match(/.*\/(.+?)\./);
-            return m && m.length > 1 ? m[1] : '';
+            if (url.includes('?')) {
+                url = url = url.substr(0, url.lastIndexOf('?'));
+            }
+            const m = url.match(/(?=\w+\.\w{3,4}$).+/);
+            return m && m.length > 0 ? m[0] : '';
         }
 
         function getStarName () {
-            var starNameEl = document.querySelector(STAR_NAME_EL_CLASS);
+            const starNameEl = document.querySelector(STAR_NAME_EL_CLASS);
             return starNameEl ? starNameEl.textContent.replace(/[/\\?%*:|"<>]/g, '') : '';
         }
         
