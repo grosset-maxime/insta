@@ -1,5 +1,6 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+require('dotenv').config();
 
 const app = express();
 const port = 8080;
@@ -41,8 +42,16 @@ app.get('/', (req, res) => {
 app.get('/api/cleanup', (req, res) => {
     console.log('### req:', req);
 
+    if (process.env.PATH_CLEANUP == null) {
+        throw new Error('Missing process.env.PATH_CLEANUP.');
+    }
+
+    const resp = {
+        PATH_CLEANUP: process.env.PATH_CLEANUP
+    }
+
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ test: 'toto' }));
+    res.end(JSON.stringify(resp));
 });
 
 app.listen(port, () => console.log(`App listening to port ${port}`));
