@@ -13,13 +13,31 @@
     {{{body}}}
     <script>
     async function cleanup () {
+      let message = '';
+      const btn = document.querySelector('#cleanup-btn');
+
+      window.document.body.classList.add('cleanup-ing');
+      btn.setAttribute('disabled', true);
+
       await fetch('/api/cleanup')
         .then(response => response.json())
         .then((response) => {
           console.log(response);
+          message = response.success ? 'Success' : 'Failure';
         })
         .catch((e) => {
             console.log(e);
+            message = e;
+        })
+        .finally(() => {
+          window.document.body.classList.remove('cleanup-ing');
+          btn.removeAttribute('disabled');
+          UIkit.notification({
+              message,
+              status: 'primary',
+              pos: 'top-right',
+              timeout: 5000
+          });
         });
     }
   </script>
