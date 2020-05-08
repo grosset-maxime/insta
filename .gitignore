@@ -3,3 +3,6 @@
 temp.*
 
 *.env
+
+**/static/uikit/**
+!**/static/uikit/README.md
