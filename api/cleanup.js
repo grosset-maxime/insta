@@ -19,7 +19,13 @@ exports.run = async function () {
 
             // Create star directory with his name.
             await fs.ensureDir(starPathDir);
-            await fs.move(`${path}/${file}`, `${starPathDir}/${file}`);
+
+            try {
+                await fs.move(`${path}/${file}`, `${starPathDir}/${file}`);
+            } catch (e) {
+                console.log(`### fs.move: ${path}/${file}`, e.message);
+                // Fail silently.
+            }
         });
 
         await Promise.all(promises)
