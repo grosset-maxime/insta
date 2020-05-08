@@ -1,5 +1,7 @@
 {
     "files.trimTrailingWhitespace": true,
+    "files.eol": "\n",
+
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
     }
