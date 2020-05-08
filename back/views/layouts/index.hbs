@@ -40,6 +40,20 @@
           });
         });
     }
+
+    window.addEventListener('keyup', (e) => {
+      // console.log(`code: ${e.code}`);
+      switch (e.code) {
+        case 'Space':
+        case 'Enter':
+          cleanup();
+          break;
+
+        // case 'Escape':
+          //break;
+        default:
+      }
+    });
   </script>
   </body>
 </html>
