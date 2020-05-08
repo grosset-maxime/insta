@@ -2,58 +2,21 @@
 <html lang="en">
   <head>
     <title>Insta</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="uikit/css/uikit.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
     <script src="uikit/js/uikit.min.js"></script>
     <script src="uikit/js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="js/main.js"></script>
   </head>
   <body>
     {{{body}}}
     <script>
-    async function cleanup () {
-      let message = '';
-      const btn = document.querySelector('#cleanup-btn');
-
-      window.document.body.classList.add('cleanup-ing');
-      btn.setAttribute('disabled', true);
-
-      await fetch('/api/cleanup')
-        .then(response => response.json())
-        .then((response) => {
-          console.log(response);
-          message = response.success ? 'Success' : 'Failure';
-        })
-        .catch((e) => {
-            console.log(e);
-            message = e;
-        })
-        .finally(() => {
-          window.document.body.classList.remove('cleanup-ing');
-          btn.removeAttribute('disabled');
-          UIkit.notification({
-              message,
-              status: 'primary',
-              pos: 'top-right',
-              timeout: 5000
-          });
-        });
-    }
-
-    window.addEventListener('keyup', (e) => {
-      // console.log(`code: ${e.code}`);
-      switch (e.code) {
-        case 'Space':
-        case 'Enter':
-          cleanup();
-          break;
-
-        // case 'Escape':
-          //break;
-        default:
-      }
-    });
-  </script>
+      document.addEventListener('DOMContentLoaded', init);
+    </script>
   </body>
 </html>

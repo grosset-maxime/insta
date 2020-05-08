@@ -39,6 +39,7 @@ app.get('/api/cleanup', async (req, res) => {
 
     try {
         await cleanup.run();
+        // await cleanup.test();
         success = true;
     } catch (e) {
         console.error(e);

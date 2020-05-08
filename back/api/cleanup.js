@@ -27,3 +27,9 @@ exports.run = async function () {
         console.error(e);
     }
 };
+
+exports.test = function () {
+    return new Promise((resolve) => {
+        setTimeout(resolve, 5000);
+    });
+}
