@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.2';
+  const version = '1.0.3';
   const name = 'Insta';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -13,6 +13,7 @@
   const POPUP_VID_CTN_CLASS = '._97aPb';
   const UNWANTED_EL_CLASSES = ['_6q-tv'];
   const STAR_NAME_EL_CLASS = '._7UhW9';
+  const VIDEO_CTN_CLASS = '.PyenC';
 
   function save(src) {
     function getFileName(url = '') {
@@ -93,6 +94,8 @@
     push(v.src);
     highlight(v);
   });
+  const vidsThumb = document.querySelectorAll(VIDEO_CTN_CLASS);
+  (vidsThumb || []).forEach((vt) => { highlight(vt); });
 
   let itemsListInput = document.querySelector('.items-list');
   let openInNewTabBtn = document.querySelector('.open-in-new-tab-btn');
