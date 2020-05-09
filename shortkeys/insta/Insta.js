@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.3';
+  const version = '1.0.4';
   const name = 'Insta';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -69,18 +69,6 @@
     el.style['box-shadow'] = '0px 0 35px red';
   }
 
-  function openInNewTabs() {
-    window._insta.forEach((src) => {
-      window.open(src, '_blank');
-    });
-  }
-
-  function copyInputText(inputText) {
-    inputText.select();
-    document.execCommand('copy');
-    inputText.blur();
-  }
-
   const imgs = document.querySelectorAll(`${POPUP_IMG_CTN_CLASS} img`);
   (imgs || []).forEach((i) => {
     if (i.classList.contains(UNWANTED_EL_CLASSES)) { return; }
@@ -96,38 +84,4 @@
   });
   const vidsThumb = document.querySelectorAll(VIDEO_CTN_CLASS);
   (vidsThumb || []).forEach((vt) => { highlight(vt); });
-
-  let itemsListInput = document.querySelector('.items-list');
-  let openInNewTabBtn = document.querySelector('.open-in-new-tab-btn');
-
-  if (!itemsListInput) {
-    itemsListInput = document.createElement('input');
-    itemsListInput.type = 'text';
-    itemsListInput.style.position = 'fixed';
-    itemsListInput.style.left = '10px';
-    itemsListInput.style.bottom = '10px';
-    itemsListInput.style.width = '90%';
-    itemsListInput.style['z-index'] = '10';
-    itemsListInput.classList.add('items-list');
-    itemsListInput.addEventListener('click', () => {
-      setTimeout(() => { copyInputText(itemsListInput); });
-      copyInputText(itemsListInput);
-    });
-
-    openInNewTabBtn = document.createElement('input');
-    openInNewTabBtn.type = 'button';
-    openInNewTabBtn.style.position = 'fixed';
-    openInNewTabBtn.style.left = '10px';
-    openInNewTabBtn.style.bottom = '40px';
-    openInNewTabBtn.style.cursor = 'pointer';
-    openInNewTabBtn.style['z-index'] = '10';
-    openInNewTabBtn.classList.add('open-in-new-tab-btn');
-    openInNewTabBtn.addEventListener('click', openInNewTabs);
-
-    document.body.appendChild(openInNewTabBtn);
-    document.body.appendChild(itemsListInput);
-  }
-
-  openInNewTabBtn.value = `Open ${window._insta.length} items in new tabs`;
-  itemsListInput.value = window._insta.join(' ');
 })();
