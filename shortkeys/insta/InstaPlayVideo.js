@@ -1,6 +1,6 @@
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.0';
+  const version = '1.0.1';
   const name = 'InstaPlayVideo';
   const shortcut = 'ctrl+down';
   /* eslint-enable no-unused-vars */
@@ -8,9 +8,22 @@
   const POPUP_CTN_CLASS = '.PdwC2';
   const VIDEO_CLASS = '.fXIG0';
   const VIDEO_CTN_CLASS = '.RzuR0';
+  const VIDEO_ALT_CTN_CLASS = '.tWeCl';
 
   function playVideo(ctn = document) {
-    ctn.querySelector(VIDEO_CLASS).click();
+    let video = ctn.querySelector(VIDEO_CLASS);
+    if (video) {
+      video.click();
+    } else {
+      video = ctn.querySelector(VIDEO_ALT_CTN_CLASS);
+      if (video) {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
   }
 
   const refRect = document.querySelectorAll(POPUP_CTN_CLASS)[0].getBoundingClientRect();
