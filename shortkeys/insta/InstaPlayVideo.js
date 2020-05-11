@@ -7,15 +7,15 @@
 
   const POPUP_CTN_CLASS = '.PdwC2';
   const VIDEO_CLASS = '.fXIG0';
+  const VIDEO_ALT_CLASS = '.tWeCl';
   const VIDEO_CTN_CLASS = '.RzuR0';
-  const VIDEO_ALT_CTN_CLASS = '.tWeCl';
 
   function playVideo(ctn = document) {
     let video = ctn.querySelector(VIDEO_CLASS);
     if (video) {
       video.click();
     } else {
-      video = ctn.querySelector(VIDEO_ALT_CTN_CLASS);
+      video = ctn.querySelector(VIDEO_ALT_CLASS);
       if (video) {
         if (video.paused) {
           video.play();
