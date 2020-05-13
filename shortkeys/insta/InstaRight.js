@@ -1,6 +1,6 @@
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.1.1';
+  const version = '1.1.2';
   const name = 'InstaRight';
   const shortcut = 'right';
   /* eslint-enable no-unused-vars */
@@ -72,6 +72,7 @@
     sheet.insertRule(`${classes.join(',')} ${styles}`, 0);
     sheet.insertRule('.zZYga { height: 100vh !important; overflow: hidden !important; }', 0);
     sheet.insertRule(`${CARROUSEL_DOT_CLASS} { box-shadow: 0px 0 5px #000; }`, 0);
+    sheet.insertRule(`${CARROUSEL_DOT_CLASS}.XCodT { background: red !important; }`, 0);
     sheet.insertRule(`${CARROUSEL_CTN_CLASS} { transform: scale(5); opacity: .8; }`, 0);
 
     const starNameEl = document.querySelector(STAR_NAME_EL_CLASS);
