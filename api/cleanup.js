@@ -81,7 +81,6 @@ exports.run = async function run() {
         });
 
         readInterface.on('line', async (line) => {
-          // console.log(line);
           const fileName = getFileNameFromUrl(line);
 
           await moveFile({
@@ -91,6 +90,11 @@ exports.run = async function run() {
             file: fileName,
           });
         });
+
+        readInterface.on('close', async () => {
+          await fs.unlink(buildPath(path, file));
+        });
+
         return;
       }
 
