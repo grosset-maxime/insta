@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.1';
+  const version = '1.0.2';
   const name = 'OfExport';
   const shortcut = 'ctrl+down';
   /* eslint-enable no-unused-vars */
@@ -10,10 +10,14 @@
   window._of = window._of || [];
 
   const STAR_NAME_EL_CLASS = '.b-profile__names .g-user-username';
+  const CHAT_STAR_NAME_EL_CLASS = '.b-chats__item.current .g-user-username';
 
   function save(content) {
     function getStarName() {
-      const starNameEl = document.querySelector(STAR_NAME_EL_CLASS);
+      let starNameEl = document.querySelector(STAR_NAME_EL_CLASS);
+      if (!starNameEl) {
+        starNameEl = document.querySelector(CHAT_STAR_NAME_EL_CLASS);
+      }
       return starNameEl ? starNameEl.textContent.replace(/[/\\?%*:|"<>]/g, '').trim().substr(1) : '';
     }
 
