@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.4';
+  const version = '1.0.5';
   const name = 'Insta';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -20,7 +20,7 @@
       if (url.includes('?')) {
         url = url.substr(0, url.lastIndexOf('?'));
       }
-      const m = url.match(/(?=\w+\.\w{3,4}$).+/);
+      const m = url.match(/(?=(\w|-)+\.\w{3,4}$).+/);
       return m && m.length > 0 ? m[0] : '';
     }
 
