@@ -3,6 +3,7 @@ const readline = require('readline');
 
 const STAR_NAME_SEPARATOR = ' - ';
 const OF_SEPARATOR = 'of - ';
+const DEVART_SEPARATOR = '_by_';
 
 function buildPath(...args) {
   let path = '';
@@ -68,7 +69,6 @@ exports.run = async function run() {
       let starName;
 
       if (file.indexOf('.') === 0) { return; }
-      if (!file.includes(STAR_NAME_SEPARATOR)) { return; }
 
       const isFile = (await fs.stat(buildPath(path, file))).isFile();
       if (!isFile) { return; }
@@ -98,11 +98,22 @@ exports.run = async function run() {
         return;
       }
 
-      starName = file.substr(0, file.indexOf(' - '));
+      if (file.includes(STAR_NAME_SEPARATOR)) {
+        starName = file.substr(0, file.indexOf(STAR_NAME_SEPARATOR));
+      } else if (file.includes(DEVART_SEPARATOR)) {
+        const reg = new RegExp(`${DEVART_SEPARATOR}([^_])+`, 'g');
+        const m = file.match(reg);
 
-      await moveFile({
-        path, file, offsetPath, starName,
-      });
+        starName = m && m.length > 0
+          ? m[m.length - 1].slice(DEVART_SEPARATOR.length)
+          : '';
+      }
+
+      if (starName) {
+        await moveFile({
+          path, file, offsetPath, starName,
+        });
+      }
     });
 
     await Promise.all(promises);
