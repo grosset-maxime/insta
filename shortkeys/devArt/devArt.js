@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.0';
+  const version = '1.0.1';
   const name = 'DevArt';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -13,6 +13,7 @@
   const STAR_NAME_SOLO_EL_CLASS = '.g5Yvc';
   const IMG_CLASS = '.eE-G0';
   const IMG_SOLO_CLASS = '._1izoQ';
+  const POPOVER_CLASS = '._2Ppd-';
 
   function save(src) {
     function getFileName(url = '') {
@@ -87,5 +88,16 @@
   if (img) {
     if (!hasDlBtn) { push(img.src); }
     highlight(img);
+  }
+
+  const initOnce = document.body.classList.contains('init-devart');
+  if (!initOnce) {
+    document.body.classList.add('init-devart');
+
+    const styleEl = document.createElement('style');
+    document.head.appendChild(styleEl);
+    const styleSheet = styleEl.sheet;
+
+    styleSheet.insertRule(`${POPOVER_CLASS} { display: none; }`, styleSheet.cssRules.length);
   }
 })();
