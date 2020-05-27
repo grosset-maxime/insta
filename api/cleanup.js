@@ -101,12 +101,8 @@ exports.run = async function run() {
       if (file.includes(STAR_NAME_SEPARATOR)) {
         starName = file.substr(0, file.indexOf(STAR_NAME_SEPARATOR));
       } else if (file.includes(DEVART_SEPARATOR)) {
-        const reg = new RegExp(`${DEVART_SEPARATOR}([^_])+`, 'g');
-        const m = file.match(reg);
-
-        starName = m && m.length > 0
-          ? m[m.length - 1].slice(DEVART_SEPARATOR.length)
-          : '';
+        starName = file.slice(file.lastIndexOf(DEVART_SEPARATOR) + DEVART_SEPARATOR.length);
+        starName = starName.substr(0, starName.lastIndexOf('_'));
       }
 
       if (starName) {
