@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.1';
+  const version = '1.0.2';
   const name = 'DevArt';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -14,6 +14,7 @@
   const IMG_CLASS = '.eE-G0';
   const IMG_SOLO_CLASS = '._1izoQ';
   const POPOVER_CLASS = '._2Ppd-';
+  const DL_BTN_CLASS = 'a[data-hook="download_button"]';
 
   function save(src) {
     function getFileName(url = '') {
@@ -72,7 +73,7 @@
     el.style['box-shadow'] = '0px 0 35px red';
   }
 
-  const downloadBtn = document.querySelector('a[data-hook="download_button"]');
+  const downloadBtn = document.querySelector(DL_BTN_CLASS);
   let hasDlBtn = false;
 
   if (downloadBtn) {
