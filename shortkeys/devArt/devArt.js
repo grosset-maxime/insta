@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.2';
+  const version = '1.0.3';
   const name = 'DevArt';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -13,6 +13,8 @@
   const STAR_NAME_SOLO_EL_CLASS = '.g5Yvc';
   const IMG_CLASS = '.eE-G0';
   const IMG_SOLO_CLASS = '._1izoQ';
+  const VID_CLASS = '._2ofkh';
+  const VID_SOLO_CLASS = '._1ihrg';
   const POPOVER_CLASS = '._2Ppd-';
   const DL_BTN_CLASS = 'a[data-hook="download_button"]';
 
@@ -33,11 +35,12 @@
       return starNameEl ? starNameEl.textContent.replace(/[/\\?%*:|"<>]/g, '') : '';
     }
 
+    const starName = getStarName();
     const url = src;
     fetch(url)
       .then((response) => response.blob())
       .then((blob) => {
-        const fileName = `${getStarName()} - ${getFileName(url)}`;
+        const fileName = `${starName} - ${getFileName(url)}`;
         const objectUrl = window.URL.createObjectURL(blob);
 
         const a = document.createElement('a');
@@ -89,6 +92,18 @@
   if (img) {
     if (!hasDlBtn) { push(img.src); }
     highlight(img);
+  }
+
+  let vidCtn = document.querySelector(`${VID_CLASS}`);
+  if (!vidCtn) {
+    vidCtn = document.querySelector(`${VID_SOLO_CLASS}`);
+  }
+  if (vidCtn) {
+    if (!hasDlBtn) {
+      const vid = vidCtn.querySelector('video');
+      if (vid) { push(vid.src); }
+    }
+    highlight(vidCtn);
   }
 
   const initOnce = document.body.classList.contains('init-devart');
