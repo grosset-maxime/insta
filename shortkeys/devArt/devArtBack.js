@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.2';
+  const version = '1.0.3';
   const name = 'DevArtBack';
   const shortcut = 'backspace';
   /* eslint-enable no-unused-vars */
@@ -13,16 +13,10 @@
   const STAR_NAME2_CLASS = '._2YW0c';
   const STAR_NAME_IN_LIST = '._1n__p';
 
-  let backBtn = document.querySelector(BACK_TO_WATCH_BTN_CLASS);
-  if (backBtn) {
-    backBtn.click();
-  } else {
-    backBtn = document.querySelector(BACK_BTN_CLASS);
+  window._lastViewedStarName = '';
 
-    if (!backBtn) { return; }
-
+  function getStarName() {
     let starName;
-
     let starNameEl = document.querySelector(STAR_NAME1_CLASS);
     if (!starNameEl) {
       starNameEl = document.querySelector(STAR_NAME2_CLASS);
@@ -31,6 +25,20 @@
       starName = starNameEl.textContent.toLowerCase();
       window._lastViewedStarName = starName;
     }
+
+    return starName;
+  }
+
+  let backBtn = document.querySelector(BACK_TO_WATCH_BTN_CLASS);
+  if (backBtn) {
+    getStarName();
+    backBtn.click();
+  } else {
+    backBtn = document.querySelector(BACK_BTN_CLASS);
+
+    if (!backBtn) { return; }
+
+    const starName = getStarName();
 
     backBtn.click();
 
