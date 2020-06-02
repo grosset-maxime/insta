@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.0';
+  const version = '1.0.1';
   const name = 'DevArtRemove';
   const shortcut = 'del';
   /* eslint-enable no-unused-vars */
 
-  const STAR_NAME_IN_LIST = '._1n__p';
-  const REMOVE_BTN_CLASS = '._9rMMY';
+  const STAR_NAME_IN_LIST = '._1HHLq';
+  const REMOVE_BTN_CLASS = '._1NSg_';
 
   const starName = window._lastViewedStarName;
 
