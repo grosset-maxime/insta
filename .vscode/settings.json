@@ -1,9 +1,77 @@
 {
-    "files.trimTrailingWhitespace": true,
-    "files.eol": "\n",
+// Mandatory VS Code Extensions:
+  // -----------------------------
+  // # ESLint (Integrates ESLint JavaScript into VS Code) (dbaeumer.vscode-eslint)
 
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-    }
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  "npm.packageManager": "npm",
+
+  "eslint.packageManager": "npm",
+  // "eslint.workingDirectories": ["DirA/DirB.m/src"],
+  "eslint.validate": ["javascript", "javascriptreact", "vue", "html"],
+
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur",
+    "editor.formatOnSave": true, // Needed to enable prettier to format scss part.
+    "editor.formatOnPaste": false
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false
+  }
+
+  // Settings to copy in your own .code-workspace:
+  // ---------------------------------------------
+  // "settings": {
+
+  // Mandatory settings: (Commented because not accepted here, only enabled on .code-workspace)
+  // ------------------------------------------------------------------------------------------
+  // To ENABLE format scss vue file part with prettier:
+  // "vetur.format.defaultFormatter.scss": "prettier",
+
+  // To NOT format html vue file part with prettier:
+  // "vetur.format.defaultFormatter.html": "none",
+
+  // To NOT format javascript vue file part with prettier:
+  // "vetur.format.defaultFormatter.js": "none",
+
+  // Optional settings:
+  // ------------------
+  // "editor.formatOnSave": false,
+  // "editor.formatOnPaste": false,
+  // "editor.acceptSuggestionOnEnter": "on",
+  // "editor.minimap.showSlider": "always",
+  // "editor.minimap.renderCharacters": false,
+  // "editor.rulers": [100],
+
+  // Set default terminal location:
+  // "terminal.integrated.cwd": "./DirA/DirB.m/src/",
+
+  // "breadcrumbs.enabled": true,
+
+  // "workbench.editor.highlightModifiedTabs": true,
+
+  // Set rulers color to red.
+  // "workbench.colorCustomizations": {
+  //   "[Monokai]": {
+  //     "editorRuler.foreground": "#ff333344"
+  //   },
+  //   "editorRuler.foreground": "#ff333344"
+  // }
+  // }
 }

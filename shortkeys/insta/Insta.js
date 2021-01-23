@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.5';
+  const version = '1.1.0';
   const name = 'Insta';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -14,6 +14,10 @@
   const UNWANTED_EL_CLASSES = ['_6q-tv'];
   const STAR_NAME_EL_CLASS = '._7UhW9';
   const VIDEO_CTN_CLASS = '.PyenC';
+
+  const GRAPH_VIDEO = 'GraphVideo';
+  const GRAPH_IMAGE = 'GraphImage';
+  const GRAPH_MULTI_ITEM = 'GraphSidecar';
 
   function save(src) {
     function getFileName(url = '') {
@@ -69,19 +73,57 @@
     el.style['box-shadow'] = '0px 0 35px red';
   }
 
+  if (!window._sharedData.entry_data.ProfilePage) {
+    // eslint-disable-next-line no-alert
+    window.alert('Reload page enable download. There is no: window._sharedData.entry_data.ProfilePage');
+    return;
+  }
+
   const imgs = document.querySelectorAll(`${POPUP_IMG_CTN_CLASS} img`);
   (imgs || []).forEach((i) => {
     if (i.classList.contains(UNWANTED_EL_CLASSES)) { return; }
-    push(i.src);
     highlight(i);
   });
 
   const vids = document.querySelectorAll(`${POPUP_VID_CTN_CLASS} video`);
   (vids || []).forEach((v) => {
     if (v.classList.contains(UNWANTED_EL_CLASSES)) { return; }
-    push(v.src);
     highlight(v);
   });
+
   const vidsThumb = document.querySelectorAll(VIDEO_CTN_CLASS);
   (vidsThumb || []).forEach((vt) => { highlight(vt); });
+
+  window._sharedData.entry_data.ProfilePage.forEach((page) => {
+    let post = page.graphql.user.edge_owner_to_timeline_media.edges
+      .find((edge) => window.location.pathname.includes(edge.node.shortcode));
+
+    post = (post || {}).node;
+
+    if (!post) { return; }
+
+    const postType = post.__typename;
+
+    if (postType === GRAPH_VIDEO) {
+      push(post.video_url);
+    } else if (postType === GRAPH_IMAGE) {
+      push(post.display_url);
+    } else if (postType === GRAPH_MULTI_ITEM) {
+      post.edge_sidecar_to_children.edges
+        .map((edge) => {
+          const item = edge.node;
+          const itemType = item.__typename;
+          let src;
+
+          if (itemType === GRAPH_VIDEO) {
+            src = item.video_url;
+          } else if (itemType === GRAPH_IMAGE) {
+            src = item.display_url;
+          }
+          return src;
+        })
+        .filter((src) => src)
+        .forEach((src) => { push(src); });
+    }
+  });
 })();
