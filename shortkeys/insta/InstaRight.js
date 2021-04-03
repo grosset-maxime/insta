@@ -1,12 +1,14 @@
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.1.2';
+  const version = '1.1.3';
   const name = 'InstaRight';
   const shortcut = 'right';
   /* eslint-enable no-unused-vars */
 
   const POPUP_CTN_OVERLAY_CLASS = '._2dDPU';
   const POPUP_CTN_CLASS = '.PdwC2';
+  const POPUP_CTN_LOADING_CLASS = '.jdnLC';
+  const POPUP_IMG_LOADING_CLASS = '.HaS-3';
   const STAR_NAME_EL_CLASS = '._7UhW9';
   const NB_POST_EL_CLASS = '.g47SY';
   const BTN_EL_CLASS = '._8-yf5';
@@ -68,6 +70,8 @@
     sheet.insertRule(`${POPUP_CTN_CLASS}${POPUP_CTN_CLASS} { max-width: none !important; width: 100%; margin: 0; }`, 0);
     sheet.insertRule(`${POPUP_CTN_CLASS} .KL4Bh .FFVAD, ._8jZFn { object-fit: contain !important; background: #000; }`, 0);
     sheet.insertRule(`${POPUP_CTN_CLASS} .KL4Bh, .kPFhm, .RzuR0 { padding-bottom: 0 !important; }`, 0);
+    sheet.insertRule(`${POPUP_CTN_LOADING_CLASS} { background-color: black !important; }`, 0);
+    sheet.insertRule(`${POPUP_IMG_LOADING_CLASS} { background-color: black !important; background-image: none !important; }`, 0);
     sheet.insertRule(`${COMMENTS_CLASS} { order: 10 !important; }`, 0);
     sheet.insertRule(`${classes.join(',')} ${styles}`, 0);
     sheet.insertRule('.zZYga { height: 100vh !important; overflow: hidden !important; }', 0);
