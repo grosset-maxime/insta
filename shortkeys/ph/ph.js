@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.0';
+  const version = '1.0.1';
   const name = 'Ph';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
@@ -22,7 +22,8 @@
   fetch(media)
     .then((response) => response.json())
     .then((array) => {
-      const info = array[array.length - 1];
+      const filteredInfo = array.filter((info) => info.videoUrl);
+      const info = filteredInfo[filteredInfo.length - 1];
       const { videoUrl } = info;
       console.log(videoUrl);
       input.value = videoUrl;
