@@ -18,7 +18,12 @@
       if (!starNameEl) {
         starNameEl = document.querySelector(CHAT_STAR_NAME_EL_CLASS);
       }
-      return starNameEl ? starNameEl.textContent.replace(/[/\\?%*:|"<>]/g, '').trim().substr(1) : '';
+      return starNameEl
+        ? starNameEl.textContent
+          .replace(/[/\\?%*:|"<>]/g, '') // Remove forbidden chars for win file name.
+          .trim()
+          .substr(1) // Remove '@' char.
+        : '';
     }
 
     function download(fileName, blob) {

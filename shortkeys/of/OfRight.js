@@ -2,12 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.1.1';
+  const version = '1.1.2';
   const name = 'OfRight';
   const shortcut = 'right';
   /* eslint-enable no-unused-vars */
 
-  const NB_POST_EL_CLASS = '.b-profile__search__title';
+  const NB_POST_EL_CLASS = '#profilePostTab';
   const POST_EL_CLASS = '.b-post';
 
   function debounce(func, timeout = 90) {
@@ -21,8 +21,11 @@
   let nbPostEl = document.querySelector('.nbpost');
   let nbRightEl = document.querySelector('.nbright');
   const urlPathname = window.location.pathname;
-  const isTabPhotos = urlPathname.lastIndexOf('/photos') > 0;
-  const isTabVideos = urlPathname.lastIndexOf('/videos') > 0;
+  const currentTab = urlPathname.split('/')[urlPathname.split('/').length - 1];
+  // const isTabMedias = currentTab === 'medias';
+  const isTabPhotos = currentTab === 'photos';
+  const isTabVideos = currentTab === 'videos';
+  // const isTabPosts = !isTabMedias && !isTabPhotos && !isTabVideos;
 
   function runOnScroll() {
     if (isTabPhotos || isTabVideos) { return; }
@@ -64,13 +67,22 @@
     nbRightEl = document.querySelector('.nbright');
   }
 
-  if (isTabPhotos || isTabVideos) {
+  if (window._currentTab !== currentTab) {
+    nbRightEl.textContent = '0';
+
     if (window._countNbLoadedPostsOnScroll) {
       window.removeEventListener('scroll', window._countNbLoadedPostsOnScroll);
       delete window._countNbLoadedPostsOnScroll;
-      nbRightEl.textContent = '1';
+      delete window._postIdSet;
     }
 
+    if (isTabPhotos || isTabVideos) {
+      nbRightEl.textContent = '1';
+    }
+  }
+  window._currentTab = currentTab;
+
+  if (isTabPhotos || isTabVideos) {
     nbRightEl.textContent = parseInt(nbRightEl.textContent || 1, 10) + 1;
   } else if (!window._countNbLoadedPostsOnScroll) {
     window._countNbLoadedPostsOnScroll = debounce(() => runOnScroll());
