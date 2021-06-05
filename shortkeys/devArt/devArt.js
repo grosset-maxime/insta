@@ -2,16 +2,16 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.4';
+  const version = '1.0.5';
   const name = 'DevArt';
   const shortcut = 'ctrl+up';
   /* eslint-enable no-unused-vars */
 
   window._devart = window._devart || [];
 
-  const STAR_NAME_EL_CLASS = '._2YW0c';
+  const STAR_NAME_EL_CLASS = '._1_AFq';
   const STAR_NAME_SOLO_EL_CLASS = '.g5Yvc';
-  const IMG_CLASS = '.eE-G0';
+  const IMG_CLASS = '._2PO4o';
   const IMG_SOLO_CLASS = '._1izoQ';
   const VID_CLASS = '._2ofkh';
   const VID_SOLO_CLASS = '._1ihrg';

@@ -1,25 +1,25 @@
 /* eslint-disable no-underscore-dangle */
 (() => {
   /* eslint-disable no-unused-vars */
-  const version = '1.0.5';
+  const version = '1.0.6';
   const name = 'DevArtBack';
   const shortcut = 'backspace';
   /* eslint-enable no-unused-vars */
 
-  const BACK_TO_WATCH_BTN_CLASS = '._1JKQ8';
-  const BACK_BTN_CLASS = '._3ngkd';
-  const TABS_BTN_CLASS = '._2qipq';
-  const STAR_NAME1_CLASS = '._1FO8S';
-  const STAR_NAME2_CLASS = '._2YW0c';
-  const STAR_NAME_IN_LIST = '._1HHLq';
+  const BACK_TO_WATCH_BTN_CLASS = '.bbmk3';
+  const BACK_BTN_CLASS = '._3pcsu';
+  const TABS_BTN_CLASS = '._1eVd- button';
+  const STAR_NAME_SOLO_CLASS = '._1_AFq';
+  const STAR_NAME_CLASS = '._2xcbh';
+  const STAR_NAME_IN_LIST = '._3riIJ';
 
   window._lastViewedStarName = '';
 
   function getStarName() {
     let starName;
-    let starNameEl = document.querySelector(STAR_NAME1_CLASS);
+    let starNameEl = document.querySelector(STAR_NAME_SOLO_CLASS);
     if (!starNameEl) {
-      starNameEl = document.querySelector(STAR_NAME2_CLASS);
+      starNameEl = document.querySelector(STAR_NAME_CLASS);
     }
     if (starNameEl) {
       starName = starNameEl.textContent.toLowerCase();
